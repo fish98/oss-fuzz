@@ -19,5 +19,5 @@ RUN apt-get update && apt-get install -y make autoconf automake libtool build-es
 RUN git clone --depth 1 https://github.com/OpenPrinting/libcups.git
 RUN git clone --depth 1 https://github.com/OpenPrinting/fuzzing.git
 
-COPY build.sh $SRC/
+RUN cp $SRC/fuzzing/projects/libcups/oss_fuzz_build.sh $SRC/build.sh
 WORKDIR $SRC/libcups
