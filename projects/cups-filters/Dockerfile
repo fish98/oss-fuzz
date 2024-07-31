@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y make autoconf automake libtool build-es
 # for cups-filters-2.x
 RUN apt-get install -y gnutls-dev libppd-dev libavahi-common-dev libavahi-client-dev autopoint gettext libcups2-dev ghostscript mupdf-tools 
 # for cups-filters-1.x
-RUN apt-get install -y aptlibexif-dev libglib2.0-dev libavahi-glib-dev liblcms2-dev libfreetype6-dev fontconfig1-dev libqpdf-dev libpoppler-cpp-dev poppler-utils
+RUN apt-get install -y libexif-dev libglib2.0-dev libavahi-glib-dev liblcms2-dev libfreetype6-dev libfontconfig1-dev libqpdf-dev libpoppler-cpp-dev poppler-utils
 
 # ubuntu 20.04 only supports cups-filters 1.x
 RUN git clone --depth 1 -b "1.x" https://github.com/OpenPrinting/cups-filters.git
