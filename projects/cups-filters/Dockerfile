@@ -15,9 +15,16 @@
 ################################################################################
 
 FROM gcr.io/oss-fuzz-base/base-builder
-RUN apt-get update && apt-get install -y make autoconf automake libtool build-essential libppd-dev
-RUN git clone --depth 1 https://github.com/OpenPrinting/cups-filters.git
+RUN apt-get update && apt-get install -y make autoconf automake libtool build-essential 
+
+# for cups-filters-2.x
+RUN apt-get install -y gnutls-dev libppd-dev libavahi-common-dev libavahi-client-dev autopoint gettext libcups2-dev ghostscript mupdf-tools 
+# for cups-filters-1.x
+RUN apt-get install -y aptlibexif-dev libglib2.0-dev libavahi-glib-dev liblcms2-dev libfreetype6-dev fontconfig1-dev libqpdf-dev libpoppler-cpp-dev poppler-utils
+
+# ubuntu 20.04 only supports cups-filters 1.x
+RUN git clone --depth 1 -b "1.x" https://github.com/OpenPrinting/cups-filters.git
 RUN git clone --depth 1 https://github.com/OpenPrinting/fuzzing.git
 
-RUN cp $SRC/fuzzing/projects/cups-filters/oss_fuzz_build.sh $SRC/build.sh
-WORKDIR $SRC/cups-filters
+RUN cp $SRC/fuzzing/projects/cups-filters/oss_fuzz_build.sh $SRC/build.sh   
+WORKDIR $SRC/cups-filters       
