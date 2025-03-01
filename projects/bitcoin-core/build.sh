@@ -18,11 +18,6 @@
 # Print date to embed it into build logs
 date
 
-if [ "$SANITIZER" != "introspector" ]; then
-  # Temporarily skip this under introspector
-  $SRC/build_cryptofuzz.sh
-fi
-
 cd $SRC/bitcoin-core/
 
 # Build dependencies
@@ -76,7 +71,7 @@ cmake -B build_fuzz \
   -DCMAKE_C_FLAGS_RELWITHDEBINFO="" \
   -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="" \
   -DBUILD_FOR_FUZZING=ON \
-  -DSANITIZER_LDFLAGS="$LIB_FUZZING_ENGINE" \
+  -DFUZZ_LIBS="$LIB_FUZZING_ENGINE" \
   $EXTRA_BUILD_OPTIONS
 
 cmake --build build_fuzz -j$(nproc)
